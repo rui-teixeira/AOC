@@ -4,13 +4,17 @@ def pipe(a,b):
     d = int(math.log10(b)) + 1
     return 10**d * a + b
 
+# this is faster \o/
+def pipe_str(a,b):
+    return int(f"{a}{b}")
+
 def solve(arr,i,acc,op,target, last_i):
     if op == '+':
         new_acc = acc + arr[i]
     elif op == '*':
         new_acc = acc * arr[i]
     elif op == '|':
-        new_acc = pipe(acc, arr[i])
+        new_acc = pipe_str(acc, arr[i])
     else:
         # just starting
         return solve(arr, i+1, arr[0], '+', target, last_i) or solve(arr, i+1, arr[0], '*', target, last_i) or solve(arr, i+1, arr[0], '|', target, last_i)
